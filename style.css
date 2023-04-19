@@ -1,4 +1,4 @@
-.result-style {
+/* .result-style {
   display: flex;
   text-align: left;
   width: 80%;
@@ -13,4 +13,11 @@ img {
   max-height: 280px;
   padding-right: 20px;
   border-radius: 20px;
+} */
+
+.w-5 {
+  width: 5%!important;
+}
+.w-10 {
+  width: 10%!important;
 }
