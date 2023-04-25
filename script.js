@@ -23,7 +23,7 @@ const newKeys = {
   status: 'Status',
   species: 'Espécie',
   gender: 'Gênero',
-  origin: 'Planeta de origem',
+  origin: 'Origem',
   episode: 'Episódios',
 }
 
