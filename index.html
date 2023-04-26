@@ -20,72 +20,70 @@
 </nav>
 
 <body class="bg">
-	<div class="">
-		<div class="container">
-			<h1 class="p-absolute w-50 mx-auto text-light " style="font-family: luckiest guy;">Wiki de todos personagens
-				Rick
-				and Morty </h1>
-		</div>
-		<div class="container">
-			<form class=" card mx-auto bg-white bg-opacity-50" action="" method="get">
-				<label for="characterId"></label>
-				<div class=" container input-group mb-3">
-					<input type="number" class="form-control mt-5" placeholder="Coloque um numero de 1 a 800"
-						aria-label="Recipient's username" aria-describedby="button-addon2" id="characterId">
-					<button class="btn btn-primary mt-5" style="background-color:#088D89;" type="submit"
-						id="btn-go">Pesquisar</button>
-				</div>
-				<!-- <div class="form-text">Coloque um numero de 1 a 700</div> -->
-				<!-- <input type="number" name="characterId" id="characterId"> -->
-				<div class="container p-5">
-					<h2 class="" style="text-align:center">Filtros</h2>
-					<!-- classificar o id com oq dseja ser tranferido, para melhor entendimento e agilizar-->
-					<div class="row">
-						<div class="col">
-							<label for="name">Nome</label>
-							<input type="checkbox" name="name" id="name">
-						</div>
-						<div class="col">
-							<label for="status">Status</label>
-							<input type="checkbox" name="status" id="status">
-						</div>
-						<div class="col">
-							<label for="species">Espécie</label>
-							<input type="checkbox" name="species" id="species">
-						</div>
-						<div class="col">
-							<label for="gender">Gênero</label>
-							<input type="checkbox" name="gender" id="gender">
-						</div>
-						<div class="col">
-							<label for="origin">Origem</label>
-							<input type="checkbox" name="origin" id="origin">
-						</div>
-						<div class="col">
-							<label for="episode">Episódios</label>
-							<input type="checkbox" name="episode" id="episode">
-						</div>
-					</div>
-
-				</div>
-				<div class=" container d-grid gap-2 d-md-flex justify-content-md-end">
-					<button type="menu" class="btn btn-primary btn-sm " id="btn-all">Selecionar todos</button>
-					<button type="reset" class="btn btn-danger btn-sm " id="btn-reset">Limpar filtro</button>
-				</div>
-
-				<hr>
+	<div class="container">
+		<h1 class="p-absolute w-50 mx-auto text-light " style="font-family: luckiest guy;">Wiki de todos personagens
+			Rick
+			and Morty </h1>
+	</div>
+	<div class="container">
+		<form class=" card mx-auto bg-white bg-opacity-50" action="" method="get">
+			<label for="characterId"></label>
+			<div class=" container input-group mb-3">
+				<input type="number" class="form-control mt-5" placeholder="Coloque um numero de 1 a 800"
+					aria-label="Recipient's username" aria-describedby="button-addon2" id="characterId">
+				<button class="btn btn-primary mt-5" style="background-color:#088D89;" type="submit"
+					id="btn-go">Pesquisar</button>
+			</div>
+			<!-- <div class="form-text">Coloque um numero de 1 a 700</div> -->
+			<!-- <input type="number" name="characterId" id="characterId"> -->
+			<div class="container p-5">
+				<h2 class="" style="text-align:center">Filtros</h2>
+				<!-- classificar o id com oq dseja ser tranferido, para melhor entendimento e agilizar-->
 				<div class="row">
-					<div id="result-style" class="col">
-						<div class="row">
-							<div class="col-sm-12 col-md-4">
-								<img src="" alt="" id="img" class="img px-5">
-							</div>
-							<div id="content" class="px-5 col-sm-12 col-md-8"></div>
+					<div class="col">
+						<label for="name">Nome</label>
+						<input type="checkbox" name="name" id="name">
 					</div>
+					<div class="col">
+						<label for="status">Status</label>
+						<input type="checkbox" name="status" id="status">
+					</div>
+					<div class="col">
+						<label for="species">Espécie</label>
+						<input type="checkbox" name="species" id="species">
+					</div>
+					<div class="col">
+						<label for="gender">Gênero</label>
+						<input type="checkbox" name="gender" id="gender">
+					</div>
+					<div class="col">
+						<label for="origin">Origem</label>
+						<input type="checkbox" name="origin" id="origin">
+					</div>
+					<div class="col">
+						<label for="episode">Episódios</label>
+						<input type="checkbox" name="episode" id="episode">
 					</div>
 				</div>
-			</form>
-		</div>
+
+			</div>
+			<div class=" container d-grid gap-2 d-md-flex justify-content-md-end">
+				<button type="menu" class="btn btn-primary btn-sm " id="btn-all">Selecionar todos</button>
+				<button type="reset" class="btn btn-danger btn-sm " id="btn-reset">Limpar filtro</button>
+			</div>
+
+			<hr>
+			<div class="row">
+				<div id="result-style" class="col-12 card mx-auto bg-white bg-opacity-50">
+					<div class="row">
+						<div class="col-sm-12 col-md-4">
+							<img src="" alt="" id="img" class="img px-5">
+						</div>
+						<div id="content" class="px-5 col-sm-12 col-md-8"></div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 <script src="script.js"></script>

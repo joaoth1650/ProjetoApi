@@ -31,12 +31,10 @@ const buildResult = (result) => {
   return keys.map((key) => document.getElementById(key))
     .map((elem) => { // utilizando map para separar cada key  do array keys
       if(elem.checked == true && (Array.isArray(result[elem.name])) == true){
-        const arrayResult = result[elem.name].join('\r\n');
-        console.log(arrayResult);
-        const newElem = document.createElement('p'); // criando um paragrafo no html em seguida utilizando DOM/innerHTML 
-
+      const arrayResult = result[elem.name].join('\r\n');
+      // console.log(arrayResult);
+        const newElem = document.createElement('input'); // criando um paragrafo no html em seguida utilizando DOM/innerHTML 
         newElem.innerHTML = `${newKeys[elem.name]}: ${arrayResult}`;// alimentando o paragrafo com a chave selecionada e o resultado da array dada l29
-  
         content.appendChild(newElem); // pendurar um filho no content (criando uma tag dentro da tag content)
       } else if(elem.checked == true && (elem.name == 'origin')){ // se checar que foi selecionado o elemento 'origin'
         const newElem = document.createElement('p');
@@ -46,7 +44,7 @@ const buildResult = (result) => {
         const newElem = document.createElement('p');
         newElem.innerHTML = `${newKeys[elem.name]}: ${result[elem.name]}`;
         content.appendChild(newElem); 
-      }
+      } 
     });
 }
 
