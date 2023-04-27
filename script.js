@@ -27,16 +27,29 @@ const newKeys = {
   episode: 'Episódios',
 }
 
+
+
+const funcao_clicou_no_botao = (url) => {
+  alert(url);
+}
+
 const buildResult = (result) => {
   return keys.map((key) => document.getElementById(key))
-    .map((elem) => { // utilizando map para separar cada key  do array keys
+    .map((elem) => {
       if(elem.checked == true && (Array.isArray(result[elem.name])) == true){
       const arrayResult = result[elem.name];
+      console.log([elem.name])
       arrayResult.map((re) => {
-        const newElem = document.createElement('input');
-        newElem.innerHTML = `${result[elem.name]}`;
-        content.appendChild(newElem);
-      })
+        const newElem = document.createElement('span');
+        newElem.className = 'btn btn-primary m-3 p-3';
+        newElem.innerHTML = `${[elem.name] + '1'}`; //replace
+        newElem.dataset.link = re;
+        newElem.onclick = function() { 
+          funcao_clicou_no_botao(re)
+        };
+        const content2 = document.getElementById('eps');
+        content2.appendChild(newElem);
+      });
       } else if(elem.checked == true && (elem.name == 'origin')){ // se checar que foi selecionado o elemento 'origin'
         const newElem = document.createElement('p');
         newElem.innerHTML = `${newKeys[elem.name]}: ${result[elem.name].name}`; 
@@ -58,8 +71,8 @@ btnGo.addEventListener('click', async (event) => { //usando async para deixar as
   const result = await fetchApi(characterId.value); //await para ficar de acordo com o assincronismo  
 
   if(content.firstChild === null){ // primeiroFilho 
-    conteinerResult.className = 'result-style';
-    image.src = `${result.image}`; // .src faz image ser alimentado pelo src da api 
+    // conteinerResult.className = 'result-style';
+    image.src = `${result.image}`; // adicionando uma classname ao pai de content e ajustando no css
     buildResult(result);
   } else {
     content.innerHTML = '';
@@ -80,3 +93,5 @@ btnAll.addEventListener('click', (event) => {
     }
   }
 });
+// const buttons = document.getElementBytagName("button"); buttons('eps');
+// buttons.className = 'btn btn-primary';
