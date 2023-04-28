@@ -48,7 +48,7 @@ const funcao_clicou_no_botao = async (url) => {
   // alert(result.characters)
   // let name = alert(result.name)
   Swal.fire({
-    title: 'info',
+    title: 'info-episodes',
     html: `<h2> nome: ${result.name}</h2>`,
    
   })
