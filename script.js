@@ -41,18 +41,17 @@ const newKeys = {
 
 
 const funcao_clicou_no_botao = async (url) => {
+  let result = await fetchApiEpisode(url)
+  // alert()
+  // alert(result.id)
+  // alert(result.episode)
+  // alert(result.characters)
+  // let name = alert(result.name)
   Swal.fire({
     title: 'info',
-    text: name,
-    footer: '<a href="">Why do I have this issue?</a>'
+    html: `<h2> nome: ${result.name}</h2>`,
+   
   })
-  alert(url);
-  let result = await fetchApiEpisode(url)
-  alert(result.name)
-  alert(result.id)
-  alert(result.episode)
-  alert(result.characters)
-  ;
 }
 
 const buildResult = (result) => {
