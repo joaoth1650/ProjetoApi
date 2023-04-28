@@ -1,13 +1,13 @@
-/* .result-style {
+.result-style {
   display: flex;
-  text-align: left;
+  text-align: center;
   width: 100%;
   margin-top: 30px;
   border-radius: 20px;
   box-shadow: 0 5px 30px rgba(0 0 0 / 0.7);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   box-sizing: border-box;
-} */
+}
 
 
 .w-5 {
@@ -34,7 +34,7 @@
   max-width: 400px;
   max-height: 260px;
   padding-right: 0px;
-  border-radius: 60px;
+  border-radius: 50px;
 }
 
 /* @media (max-width: 777px) {

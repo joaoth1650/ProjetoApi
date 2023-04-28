@@ -17,62 +17,27 @@ const fetchApi = (value) => {
   return result;
 }
 
-const fetchApiEpisode = (url) => {
-  const result = fetch(`${url}`)
-  .then((res) => res.json()) // res = response/ responder em json
-  .then((data) => {
-    console.log(data); // data = dado
-    return data;
-  });
-
-  return result;
-}
-
 const keys = ['name', 'status', 'species', 'gender', 'origin', 'episode'];
 const newKeys = {
   name: 'Nome',
   status: 'Status',
   species: 'Espécie',
   gender: 'Gênero',
-  origin: 'Origem',
+  origin: 'Planeta de origem',
   episode: 'Episódios',
-}
-
-
-
-const funcao_clicou_no_botao = async (url) => {
-  Swal.fire({
-    title: 'info',
-    text: name,
-    footer: '<a href="">Why do I have this issue?</a>'
-  })
-  alert(url);
-  let result = await fetchApiEpisode(url)
-  alert(result.name)
-  alert(result.id)
-  alert(result.episode)
-  alert(result.characters)
-  ;
 }
 
 const buildResult = (result) => {
   return keys.map((key) => document.getElementById(key))
-  .map((elem) => {
-    const content2 = document.getElementById('eps');
-    content2.innerHTML = ""
-    if(elem.checked == true && (Array.isArray(result[elem.name])) == true){
-      const arrayResult = result[elem.name];
-      arrayResult.map((re) => {
-        const newElem = document.createElement('span');
-        const letra = re.replace('https://rickandmortyapi.com/api/episode/', 'ep ');
-        newElem.className = 'btn btn-primary m-3 p-3 rounded-circle p-3';
-        newElem.innerHTML = `${letra}`; //replace
-        newElem.dataset.link = re;
-        newElem.onclick = function() { 
-          funcao_clicou_no_botao(re)
-        };
-        content2.appendChild(newElem);
-      });
+    .map((elem) => { // utilizando map para separar cada key  do array keys
+      if(elem.checked == true && (Array.isArray(result[elem.name])) == true){
+        const arrayResult = result[elem.name].join('\r\n');
+        console.log(arrayResult);
+        const newElem = document.createElement('p'); // criando um paragrafo no html em seguida utilizando DOM/innerHTML 
+
+        newElem.innerHTML = `${newKeys[elem.name]}: ${arrayResult}`;// alimentando o paragrafo com a chave selecionada e o resultado da array dada l29
+  
+        content.appendChild(newElem); // pendurar um filho no content (criando uma tag dentro da tag content)
       } else if(elem.checked == true && (elem.name == 'origin')){ // se checar que foi selecionado o elemento 'origin'
         const newElem = document.createElement('p');
         newElem.innerHTML = `${newKeys[elem.name]}: ${result[elem.name].name}`; 
@@ -81,7 +46,7 @@ const buildResult = (result) => {
         const newElem = document.createElement('p');
         newElem.innerHTML = `${newKeys[elem.name]}: ${result[elem.name]}`;
         content.appendChild(newElem); 
-      } 
+      }
     });
 }
 
@@ -95,7 +60,7 @@ btnGo.addEventListener('click', async (event) => { //usando async para deixar as
 
   if(content.firstChild === null){ // primeiroFilho 
     conteinerResult.className = 'result-style';
-    image.src = `${result.image}`; // adicionando uma classname ao pai de content e ajustando no css
+    image.src = `${result.image}`; // .src faz image ser alimentado pelo src da api 
     buildResult(result);
   } else {
     content.innerHTML = '';
@@ -116,5 +81,3 @@ btnAll.addEventListener('click', (event) => {
     }
   }
 });
-// const buttons = document.getElementBytagName("button"); buttons('eps');
-// buttons.className = 'btn btn-primary';
