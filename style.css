@@ -11,7 +11,7 @@
 
 
 .w-5 {
-  width: 5%!important;
+  width: 8%!important;
 }
 .w-10 {
   width: 10%!important;
@@ -75,3 +75,27 @@
     background-color: rgb(20, 122, 218);
     max-width: 100px;
 } */
+
+.bg-do-sweet {
+  background-color: #161717;
+  color: #ffff;
+  font-family: 'Noto Sans Arabic';
+  border-radius: 20px;
+}
+.footer-sweet {
+  background-color: #1E1E1E;
+  color: #ffff;
+}
+
+.nav-sweet img{
+  width: 100px;
+  padding-top: 4px;
+  border-radius: 100px;
+}
+.nav-sweet {
+  background-color: #178178;
+  height: 105px;
+  margin-bottom: 4px;
+  border-radius: 50px;
+}
+

@@ -47,10 +47,19 @@ const funcao_clicou_no_botao = async (url) => {
   // alert(result.episode)
   // alert(result.characters)
   // let name = alert(result.name)
+  console.log(url)
+  const personag = result.characters.join('\r\n')
   Swal.fire({
-    title: 'info-episodes',
-    html: `<h2> nome: ${result.name}</h2>`,
-   
+    html: `<div class="px-4 nav-sweet"><img src="RMapi.png"></div>
+           <div class="p-4 bg-do-sweet"><h2> Name: ${result.name}</h2>
+           <h2> Personagens: ${personag}</h2>
+           <h2> Temporada: ${result.episode}</h2>
+           
+           <br>
+           
+           <img src="thumb.jpg" class="m-2"style="width:400px; height="130px">
+           </div>`,
+    footer: `<div class="footer-sweet"><a href= "https://www.youtube.com"> proximo episode</a></div>`,
   })
 }
 
