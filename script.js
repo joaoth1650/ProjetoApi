@@ -5,6 +5,8 @@ const btnAll =document.getElementById('btn-all');
 const content = document.getElementById('content');
 const conteinerResult = document.getElementById('result-style');
 const image = document.getElementById('img');
+const anterior = document.getElementById("anterior");
+const proximo = document.getElementById("proximo");
 
 const fetchApi = (value) => {
   const result = fetch(`https://rickandmortyapi.com/api/character/${value}`)
@@ -38,30 +40,55 @@ const newKeys = {
   episode: 'Episódios',
 }
 
+// const proximaURL = (url) => {
+//   url.split('')
+//   let urlNum = parseInt(url[40] + url[41])
+//   let copcop = urlNum + 1
+//   url = `https://rickandmortyapi.com/api/episode/${copcop}`
+//   console.log(url)
+// }
+
 
 
 const funcao_clicou_no_botao = async (url) => {
   let result = await fetchApiEpisode(url)
-  // alert()
-  // alert(result.id)
-  // alert(result.episode)
-  // alert(result.characters)
-  // let name = alert(result.name)
   console.log(url)
-  const personag = result.characters.join('\r\n')
+  const personag = result.characters.join('\r\n\n')
   Swal.fire({
     html: `<div class="px-4 nav-sweet"><img src="RMapi.png"></div>
            <div class="p-4 bg-do-sweet"><h2> Name: ${result.name}</h2>
            <h2> Personagens: ${personag}</h2>
+           <h2> Lançamento:${result.air_date}</h2>
            <h2> Temporada: ${result.episode}</h2>
            
            <br>
            
            <img src="thumb.jpg" class="m-2"style="width:400px; height="130px">
+           </div>
+           <div class="footer-sweet">
+           <span class="btn btn-primary" id="proximo">Próximo Episódio</span>
+           </div>
+           <span class="btn btn-primary" id="anterior">Episódio Anterior</span>
            </div>`,
-    footer: `<div class="footer-sweet"><a href= "https://www.youtube.com"> proximo episode</a></div>`,
+    width:'50%',
   })
+//     const proximaURL = (url) => {
+//       url.split('')
+//       let urlNum = parseInt(url[40] + url[41])
+//       let copcop = urlNum + 1
+//       url = `https://rickandmortyapi.com/api/episode/${copcop}`
+//       console.log(url)
+// }
 }
+
+// proximo.addEventListener('click', (event) => {
+//   event.preventDefault();
+//    if (1 = 1) 
+//    return url = `${proximaURL}`
+// })
+
+
+
 
 const buildResult = (result) => {
   return keys.map((key) => document.getElementById(key))

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Previous Next Functionality</title>
+    <script type="text/javascript">
+
+    var myItemObjectArray = new Array();
+    var currentItemIndex = 5;
+
+    alert("CURRENT ITEM INDEX " + currentItemIndex);
+    for(i=0;i<10;i++)
+        {
+            var ItemCatalog = new Object();
+
+            ItemCatalog.itemId = i;
+            ItemCatalog.itemName = "a"+i;
+
+            myItemObjectArray.push(ItemCatalog);
+            /*alert("OBJECT ADDED " + myItemObjectArray.length);*/
+        }
+
+
+    function getPrevious(currentItemIndex, myItemObjectArray)
+        {
+            var localCurrentItemIndex = currentItemIndex-1;
+            alert("PREVIOUS OBJECT" + myItemObjectArray[localCurrentItemIndex].itemId + " " + myItemObjectArray[localCurrentItemIndex].itemName);
+
+            // Modify Current Item Index
+            currentItemIndex--;
+            alert(currentItemIndex);
+        }   
+
+    function getNext(currentItemIndex, myItemObjectArray)
+        {
+            var localCurrentItemIndex = currentItemIndex+1; 
+            alert("NEXT OBJECT" + myItemObjectArray[localCurrentItemIndex].itemId + " " + myItemObjectArray[localCurrentItemIndex].itemName);
+            // Modify Current Item Index
+            currentItemIndex++;
+            alert(currentItemIndex);
+        }   
+    </script>
+</head>
+
+<body>
+    <button id="previous" onclick="getPrevious(currentItemIndex, myItemObjectArray)">Previous</button>
+    <button id="next" onclick="getNext(currentItemIndex, myItemObjectArray)">Next</button>
+</body>
+</html>
