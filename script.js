@@ -7,7 +7,7 @@ const content = document.getElementById('content');
 const conteinerResult = document.getElementById('result-style');
 const image = document.getElementById('img');
 const anterior = document.getElementById("anterior");
-const proximo = document.getElementById("proximo");
+const proximoButton = document.getElementById("proximoButton");
 
 const fetchApi = (value) => {
   const result = fetch(`https://rickandmortyapi.com/api/character/${value}`)
@@ -43,28 +43,31 @@ const newKeys = {
   episode: 'Episódios',
 }
 
-// const proximaURL = (url) => {
-//   url.split('')
-//   let urlNum = parseInt(url[40] + url[41])
-//   let copcop = urlNum + 1
-//   url = `https://rickandmortyapi.com/api/episode/${copcop}`
-//   console.log(url)
-// }
-
 const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
   let result = await fetchApiEpisode(url)
   const personag = result.characters.join('\r\n\n')
   console.log({next}, {back})
   if(next === undefined && back === undefined){
     console.log({linkEpisodios})
-    let
-    // quem é o proximo ou anterior
-    next = `${proximo}`;
-    back = `${anterior}`;
+
+    for (let i = 0; i < linkEpisodios.length; i++) {
+      // if(linkEpisodios[i] === url){
+      //   back = linkEpisodios[i-1]
+      //   next = linkEpisodios[i+1]
+      // }
+
+
+      if (linkEpisodios[i] === url) {
+        // proximo.disabled = true;
+        next = linkEpisodios[i + 1]
+        back = linkEpisodios[i - 1]
+      }
+    }
   }
+  let meuHtml = `<div class="px-4 m-4 nav-sweet"><img src="RMapi.png"></div>`;
   
   Swal.fire({
-    html: `<div class="px-4 m-4 nav-sweet"><img src="RMapi.png"></div>
+    html: `${meuHtml}
            <div class="p-4 bg-do-sweet" id="sweet-content"><h2> Name: ${result.name}</h2>
            <h2> Personagens: ${personag}</h2>
            <h2> Lançamento:${result.air_date}</h2>
@@ -77,11 +80,15 @@ const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
            <div class="footer-sweet row">
            <span class="btn btn-primary col-2 d-grid gap-2 d-md-block" id="anterior" onclick="funcao_clicou_no_botao('${back}')">Episódio Anterior</span>
            <div class="col-8"></div>
-           <span class="btn btn-primary col-2 d-md-flex justify-content-md-end" id="proximo" onclick="funcao_clicou_no_botao('${next}')">Próximo Episódio</span>
+           <span class="btn btn-primary col-2 d-md-flex justify-content-md-end" id="proximoButton" onclick="funcao_clicou_no_botao('${next}')">Próximo Episódio</span>
            
            </div>`,
     width:'50%',
   })
+   if ( next===undefined ) {
+    const proximoButton = document.getElementById('proximoButton');
+    proximoButton.classList.add('disabled')
+  }
 }
 
 const linkEpisodios = [];
@@ -94,16 +101,16 @@ const buildResult = (result) => {
     if(elem.checked == true && (Array.isArray(result[elem.name])) == true){
       const arrayResult = result[elem.name];
       linkEpisodios.push(...arrayResult)
-      arrayResult.map((re,index) => {
+      arrayResult.map((url,index) => {
         const newElem = document.createElement('span');
-        const letra = re.replace('https://rickandmortyapi.com/api/episode/', 'ep ');
+        const letra = url.replace('https://rickandmortyapi.com/api/episode/', 'ep ');
         newElem.className = 'btn btn-primary m-3 p-3 rounded-circle p-3';
         newElem.innerHTML = `${letra}`; //replace
-        newElem.dataset.link = re;
+        newElem.dataset.link = url;
         let next = arrayResult[index + 1]
         let back = arrayResult[index - 1]
         newElem.onclick = function() { 
-          funcao_clicou_no_botao(re, next, back)
+          funcao_clicou_no_botao(url, next, back)
         };
         content2.appendChild(newElem);
       });
