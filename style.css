@@ -4,9 +4,8 @@
   width: 100%;
   margin-top: 30px;
   border-radius: 20px;
-  box-shadow: 0 5px 30px rgba(0 0 0 / 0.7);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  box-sizing: border-box;
+  
 }
 
 
@@ -83,6 +82,9 @@
   border-radius: 20px;
 }
 .footer-sweet {
+  margin-top: 30px;
+  border-radius: 40px;
+  width: 90%;
   background-color: #1E1E1E;
   color: #ffff;
 }
@@ -99,3 +101,7 @@
   border-radius: 50px;
 }
 
+
+.sumiu{
+  display: none;
+}

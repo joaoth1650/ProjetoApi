@@ -3,11 +3,13 @@ const btnGo = document.getElementById('btn-go');
 const btnReset = document.getElementById('btn-reset');
 const btnAll =document.getElementById('btn-all');
 const content = document.getElementById('content');
-
 const conteinerResult = document.getElementById('result-style');
 const image = document.getElementById('img');
-const anterior = document.getElementById("anterior");
+const aondeImagensFicam = document.getElementById('aondeImagensFicam');
+const anterior = document.getElementById("anteriorButton");
 const proximoButton = document.getElementById("proximoButton");
+
+
 
 const fetchApi = (value) => {
   const result = fetch(`https://rickandmortyapi.com/api/character/${value}`)
@@ -31,7 +33,20 @@ const fetchApiEpisode = (url) => {
   return result;
 }
 
+function generateRandomInteger(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
 
+const fetchApiAllCharacters = () => {
+  const result = fetch(`https://rickandmortyapi.com/api/character/${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)}`)
+  .then((res) => res.json()) // res = response/ responder em json
+  .then((data) => {
+    console.log(data); // data = dado
+    return data;
+  });
+
+  return result;
+}
 
 const keys = ['name', 'status', 'species', 'gender', 'origin', 'episode'];
 const newKeys = {
@@ -43,20 +58,16 @@ const newKeys = {
   episode: 'Episódios',
 }
 
+
+
 const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
   let result = await fetchApiEpisode(url)
-  const personag = result.characters.join('\r\n\n')
+  const personag = result.characters.join('\r\n')
   console.log({next}, {back})
   if(next === undefined && back === undefined){
     console.log({linkEpisodios})
 
     for (let i = 0; i < linkEpisodios.length; i++) {
-      // if(linkEpisodios[i] === url){
-      //   back = linkEpisodios[i-1]
-      //   next = linkEpisodios[i+1]
-      // }
-
-
       if (linkEpisodios[i] === url) {
         // proximo.disabled = true;
         next = linkEpisodios[i + 1]
@@ -75,19 +86,30 @@ const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
            
            <br>
            
-           <img src="thumb.jpg" class="m-2"style="width:400px; height="130px">
+           <img src="thumb.jpg" class="m-2 col-12">
            </div>
-           <div class="footer-sweet row">
-           <span class="btn btn-primary col-2 d-grid gap-2 d-md-block" id="anterior" onclick="funcao_clicou_no_botao('${back}')">Episódio Anterior</span>
-           <div class="col-8"></div>
-           <span class="btn btn-primary col-2 d-md-flex justify-content-md-end" id="proximoButton" onclick="funcao_clicou_no_botao('${next}')">Próximo Episódio</span>
+           <div class="footer-sweet m-3 row">
+           <span class="btn btn-primary col-3" id="anteriorButton" onclick="funcao_clicou_no_botao('${back}')">Episódio Anterior</span>
+           <div class="col-6"></div>
+           <span class="btn btn-primary col-3" id="proximoButton" onclick="funcao_clicou_no_botao('${next}')">Próximo Episódio</span>
            
            </div>`,
-    width:'50%',
+    width:'55%',
+    height:'30%',
+
   })
    if ( next===undefined ) {
     const proximoButton = document.getElementById('proximoButton');
-    proximoButton.classList.add('disabled')
+    proximoButton.classList.add('sumiu')
+    const anterior = document.getElementById('anteriorButton');
+    anterior.classList.remove('col-3')
+  } else if (back===undefined) {
+    const anterior = document.getElementById('anteriorButton');
+    anterior.classList.add('sumiu')
+    const proximoButton = document.getElementById('proximoButton');
+    proximoButton.classList.remove('col-3')
+    
+    
   }
 }
 
@@ -125,6 +147,27 @@ const buildResult = (result) => {
       } 
     });
 }
+
+const BuildHome = async () => {
+  let personagens = await fetchApiAllCharacters();
+
+  personagens.map((personagem) => {
+    const personagemImg = personagem.image
+    let conteudo = `
+      <div class= "col-lg-2">
+      <img src="${personagemImg}" class="p-4 img-fluid">
+      </div>
+    `;
+    aondeImagensFicam.innerHTML = aondeImagensFicam.innerHTML + conteudo;
+    // aondeImagensFicam.insertAdjacentHTML('afterEnd', conteudo);
+    // newElem.setAttribute("src", `${personagemImg}`);
+    // aondeImagensFicam.appendChild(newElem)
+  })
+}
+
+BuildHome()
+
+
 
 btnGo.addEventListener('click', async (event) => { //usando async para deixar assíncrono e ser entendido em tempo diferente do demais codigo  
   event.preventDefault(); // preservar os dados na tela 
