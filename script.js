@@ -1,4 +1,4 @@
-const characterId = document.getElementById('characterId');
+const characterName= document.getElementById('characterName');
 const btnGo = document.getElementById('btn-go');
 const btnReset = document.getElementById('btn-reset');
 const btnAll =document.getElementById('btn-all');
@@ -11,8 +11,8 @@ const proximoButton = document.getElementById("proximoButton");
 
 
 
-const fetchApi = (value) => {
-  const result = fetch(`https://rickandmortyapi.com/api/character/${value}`)
+const fetchApiNameCharacter = (value) => {
+  const result = fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
   .then((res) => res.json()) // res = response/ responder em json
   .then((data) => {
     console.log(data); // data = dado
@@ -21,6 +21,7 @@ const fetchApi = (value) => {
 
   return result;
 }
+
 
 const fetchApiEpisode = (url) => {
   const result = fetch(`${url}`)
@@ -33,12 +34,10 @@ const fetchApiEpisode = (url) => {
   return result;
 }
 
-function generateRandomInteger(max) {
-  return Math.floor(Math.random() * max) + 1;
-}
+
 
 const fetchApiAllCharacters = () => {
-  const result = fetch(`https://rickandmortyapi.com/api/character/${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)}`)
+  const result = fetch(`https://rickandmortyapi.com/api/character/${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)}`)
   .then((res) => res.json()) // res = response/ responder em json
   .then((data) => {
     console.log(data); // data = dado
@@ -46,6 +45,10 @@ const fetchApiAllCharacters = () => {
   });
 
   return result;
+}
+
+function generateRandomInteger(max) {
+  return Math.floor(Math.random() * max) + 1;
 }
 
 const keys = ['name', 'status', 'species', 'gender', 'origin', 'episode'];
@@ -86,7 +89,7 @@ const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
            
            <br>
            
-           <img src="thumb.jpg" class="m-2 col-12">
+           <img src="img/thumb.jpg" class="m-2 col-12">
            </div>
            <div class="footer-sweet m-3 row">
            <span class="btn btn-primary col-3" id="anteriorButton" onclick="funcao_clicou_no_botao('${back}')">Episódio Anterior</span>
@@ -113,8 +116,27 @@ const funcao_clicou_no_botao = async (url, next=undefined, back=undefined) => {
   }
 }
 
-const linkEpisodios = [];
 
+
+const buildPesquisa = async () => {
+  let opçoesCharacters = await fetchApiNameCharacter(characterName.value);
+ aondeImagensFicam.innerHTML =""
+  opçoesCharacters.results.map((result) => {
+    const personagensResult = result.image
+    let conteudo = `
+      <div class= "col-lg-2">
+      <img src="${personagensResult}" class="p-4 img-fluid">
+      </div>
+    `;
+    aondeImagensFicam.innerHTML = aondeImagensFicam.innerHTML + conteudo;
+    
+   
+  })
+}
+
+// buildPesquisa()
+
+const linkEpisodios = [];
 const buildResult = (result) => {
   return keys.map((key) => document.getElementById(key))
   .map((elem) => {
@@ -165,27 +187,27 @@ const BuildHome = async () => {
   })
 }
 
-BuildHome()
+// BuildHome()
 
 
 
 btnGo.addEventListener('click', async (event) => { //usando async para deixar assíncrono e ser entendido em tempo diferente do demais codigo  
   event.preventDefault(); // preservar os dados na tela 
-
-  if(characterId.value === ''){
+  
+  if(characterName.value === ''){
     return content.innerHTML = 'É necessário fazer um filtro.';
   }
-  const result = await fetchApi(characterId.value); //await para ficar de acordo com o assincronismo  
+  const result = await fetchApiNameCharacter(characterName.value); //await para ficar de acordo com o assincronismo  
 
   if(content.firstChild === null){ // primeiroFilho 
     conteinerResult.className = 'result-style';
     image.src = `${result.image}`; // adicionando uma classname ao pai de content e ajustando no css
-    buildResult(result);
+    buildPesquisa(result);
   } else {
     content.innerHTML = '';
     conteinerResult.className = 'result-style';
     image.src = `${result.image}`;
-    buildResult(result);
+    buildPesquisa(result);
   }
 });
 

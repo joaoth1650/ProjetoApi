@@ -21,7 +21,7 @@
   box-sizing: border-box;
 }
 .bg {
-  background-image: url(suus.jpg);
+  background-image: url(img/suus.jpg);
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
