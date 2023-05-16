@@ -45,7 +45,7 @@ const fetchApiEpisode = (url) => {
 }
 
 const fetchApiAllCharacters = () => {
-    const result = fetch(`https://rickandmortyapi.com/api/character/${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)}`)
+    const result = fetch(`https://rickandmortyapi.com/api/character/${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)},${generateRandomInteger(800)}`)
         .then((res) => res.json()) // res = response/ responder em json
         .then((data) => {
             console.log(data); // data = dado
@@ -62,6 +62,8 @@ function generateRandomInteger(max) {
     return Math.floor(Math.random() * max) + 1;
 }
 
+const linkEpisodios = [];
+
 const consultaPerson = async (id) => {
     const result = await fetchApi(id)
     buildResult(result)
@@ -77,12 +79,20 @@ const newKeys = {
     episode: 'Episódios',
 }
 
+
+
 // inclementos acima //
 
 const funcao_clicou_no_botao = async (url, next = undefined, back = undefined) => {
     let result = await fetchApiEpisode(url)
-    const personag = result.characters.join('\r\n')
-    console.log({ next }, { back })
+    
+
+    let personagensIds = result.characters.map(char => char.replace('https://rickandmortyapi.com/api/character/', "https://rickandmortyapi.com/api/character/avatar/")+".jpeg");
+    console.log(personagensIds);
+
+    let imagePerson = personagensIds.map(personagem => `<img src="${personagem}">`)
+
+
     if (next === undefined && back === undefined) {
         console.log({ linkEpisodios })
 
@@ -99,15 +109,15 @@ const funcao_clicou_no_botao = async (url, next = undefined, back = undefined) =
     Swal.fire({
         html: `${meuHtml}
            <div class="p-4 bg-do-sweet" id="sweet-content"><h2> Name: ${result.name}</h2>
-           <h2> Personagens: ${personag}</h2>
+        
            <h2> Lançamento:${result.air_date}</h2>
            <h2> Temporada: ${result.episode}</h2>
-           
+           <h2> personagens:</h2> ${imagePerson}           
            <br>
            
            <img src="img/thumb.jpg" class="m-2 col-12">
            </div>
-           <div class="footer-sweet m-3 row">
+           <div class="footer-sweet mx-auto row">
            <span class="btn btn-primary col-3" id="anteriorButton" onclick="funcao_clicou_no_botao('${back}')">Episódio Anterior</span>
            <div class="col-6"></div>
            <span class="btn btn-primary col-3" id="proximoButton" onclick="funcao_clicou_no_botao('${next}')">Próximo Episódio</span>
@@ -147,7 +157,7 @@ const buildPesquisa = async () => {
         const episodes = result.episode
         let conteudo = ""
         conteudo = `
-      <div class= "col-lg-2">
+    <div class= "mt-3 m-3 col-sm-2 bg-dark text-white rounded">
       <img src="${personagensResult}" class="p-4 img-fluid">
       <p><span onclick="consultaPerson(${idPersonagem})">${nomeDosPersonagens}</span></p>
       </div>
@@ -162,36 +172,43 @@ const buildResult = (result) => {
 
     const origin = result.origin;
     const episodes = result.episode;
-
+    conteinerResult.className = 'result-style';
     let conteudo = ``
     conteudo = `
-        <div class="container row">
-        <div class="col">
-           <div>
-           <img src="${result.image}" id="personImage">
-           </div>
-                <h1 class="">${result.name}</h1>
+
+    <div class="container">
+        <div class="row">
+
+                <div class="">
+                    <img src="${result.image}" id="personImage">
+                </div>
+
+                 <h1 class="">${result.name}</h1>
+
                 <div class="row">
-                 
-                 <h3 class="col-12">status: ${result.status}</h3>
-                 <h3 class="col-12">especie: ${result.species}</h3>
-                 <h3 class="col-12">genero: ${result.gender}</h3>
-                 <h3 class="col-12"origem: >${origin.name}</h3>
-               </div>
+                   
+                    <h3 class="col-3">status: ${result.status}</h3>
+                    <h3 class="col-3">especie: ${result.species}</h3>
+                    <h3 class="col-3">genero: ${result.gender}</h3>
+                    <h3 class="col-3"origem: >${origin.name}</h3>
+                </div>  
+
             <div class="row">
               <div class="col">
-              <select class="form-select col" >
-                ${episodes.map(episode => `<option value="${episode}">${episode}</option>`).join('')}
-                </select>
-              <span class="btn btn-primary col" onchange="funcao_clicou_no_botao(this.value)">VAI</span> 
-              </div>
+                    <select class="col form-select" onchange="funcao_clicou_no_botao(this.value)">
+                        <option>selecione um episodio</option>
+                        ${episodes.map(episode => `<option value="${episode}">${episode}</option>`).join('')}
+                    </select>
+                    <span class="btn btn-primary col" >VAI</span> 
+                </div>
             </div>
+
         </div>
-        </div>
+    </div>
      `
     conteinerResult.innerHTML = conteudo
 }
-const linkEpisodios = [];
+
 // return keys.map((key) => document.getElementById(key))
 // 	.map((elem) => {
 // 		const content2 = document.getElementById('eps');
@@ -229,19 +246,32 @@ const linkEpisodios = [];
 const BuildHome = async () => {
     let personagens = await fetchApiAllCharacters();
 
-    personagens.map((personagem) => {
-        const personagemImg = personagem.image
+    personagens.map((personagem, index) => {
+
+        const episodes = personagem.episode
+        const personagensResult = personagem.image
+        const nomeDosPersonagens = personagem.name
+        const idPersonagem = personagem.id
+        linkEpisodios.push(...episodes)
+        let next = episodes[index + 1]
+        let back = episodes[index - 1]
+
         let conteudo = `
-      <div class= "col-lg-2">
-      <img src="${personagemImg}" class="p-4 img-fluid">
-      </div>
-    `;
+        <div class= " mt-3 m-3 col-sm-2 bg-dark text-white rounded">
+        <img src="${personagensResult}" class="p-1 img-fluid">
+        <p><span class="" onclick="consultaPerson(${idPersonagem})">${nomeDosPersonagens}</span></p>
+        </div>
+      `;
+
+
         aondeImagensFicam.innerHTML = aondeImagensFicam.innerHTML + conteudo;
         // aondeImagensFicam.insertAdjacentHTML('afterEnd', conteudo);
         // newElem.setAttribute("src", `${personagemImg}`);
         // aondeImagensFicam.appendChild(newElem)
     })
 }
+
+BuildHome()
 
 // Construção da pagina com DOM //
 

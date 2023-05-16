@@ -21,7 +21,7 @@
   box-sizing: border-box;
 }
 .bg {
-  background-image: url(img/suus.jpg);
+  background-color: #1E1E1E;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -105,5 +105,7 @@
 .sumiu{
   display: none;
 }
+
+
 
 
