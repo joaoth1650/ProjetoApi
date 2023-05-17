@@ -1,6 +1,4 @@
-
-
-html { 
+html {
   scroll-behavior: smooth;
   scroll-padding-top: 10px;
 }
@@ -13,21 +11,24 @@ html {
   margin-top: 30px;
   border-radius: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  
+
 }
 
 
 .w-5 {
-  width: 8%!important;
+  width: 8% !important;
 }
+
 .w-10 {
-  width: 10%!important;
+  width: 10% !important;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .bg {
   background-color: #1E1E1E;
   background-size: cover;
@@ -37,6 +38,7 @@ html {
   position: relative;
   height: 100vh;
 }
+
 #img {
   max-width: 400px;
   max-height: 260px;
@@ -72,10 +74,10 @@ html {
 }
 
 .aa {
-  border-radius: var(--bs-border-radius)!important;
-  margin-right: auto!important;
-  margin-left: auto!important;
-  display: block!important;
+  border-radius: var(--bs-border-radius) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  display: block !important;
 }
 
 /* button {
@@ -89,6 +91,7 @@ html {
   font-family: 'Noto Sans Arabic';
   border-radius: 20px;
 }
+
 .footer-sweet {
   margin-top: 30px;
   border-radius: 40px;
@@ -97,11 +100,12 @@ html {
   color: #ffff;
 }
 
-.nav-sweet img{
+.nav-sweet img {
   width: 100px;
   padding-top: 4px;
   border-radius: 100px;
 }
+
 .nav-sweet {
   background-color: #0C6D4A;
   height: 105px;
@@ -110,10 +114,6 @@ html {
 }
 
 
-.sumiu{
+.sumiu {
   display: none;
 }
-
-
-
-

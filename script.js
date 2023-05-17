@@ -86,9 +86,9 @@ const newKeys = {
 
 const funcao_clicou_no_botao = async (url, next = undefined, back = undefined) => {
     let result = await fetchApiEpisode(url)
-    
 
-    let personagensIds = result.characters.map(char => char.replace('https://rickandmortyapi.com/api/character/', "https://rickandmortyapi.com/api/character/avatar/")+".jpeg");
+
+    let personagensIds = result.characters.map(char => char.replace('https://rickandmortyapi.com/api/character/', "https://rickandmortyapi.com/api/character/avatar/") + ".jpeg");
     console.log(personagensIds);
 
     let imagePerson = personagensIds.map(personagem => `<img src="${personagem}">`)
