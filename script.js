@@ -65,6 +65,7 @@ function generateRandomInteger(max) {
 const linkEpisodios = [];
 
 const consultaPerson = async (id) => {
+    location.href = "#selecao1";
     const result = await fetchApi(id)
     buildResult(result)
 }
@@ -157,9 +158,9 @@ const buildPesquisa = async () => {
         const episodes = result.episode
         let conteudo = ""
         conteudo = `
-    <div class= "mt-3 m-3 col-sm-2 bg-dark text-white rounded">
-      <img src="${personagensResult}" class="p-4 img-fluid">
-      <p><span onclick="consultaPerson(${idPersonagem})">${nomeDosPersonagens}</span></p>
+        <div class= "mt-3 m-3 col-sm-5 col-md-3 col-lg-2 bg-dark text-white rounded">
+      <span onclick="consultaPerson(${idPersonagem})"><img src="${personagensResult}" class="p-4 img-fluid"></span>
+      <p>${nomeDosPersonagens}</p>
       </div>
     `;
 
@@ -173,17 +174,17 @@ const buildResult = (result) => {
     const origin = result.origin;
     const episodes = result.episode;
     conteinerResult.className = 'result-style';
-    let conteudo = ``
+    let conteudo = ""
     conteudo = `
 
     <div class="container">
         <div class="row">
-
+                
                 <div class="">
-                    <img src="${result.image}" id="personImage">
+                    <img src="${result.image}" class="rounded"id="personImage">
                 </div>
 
-                 <h1 class="">${result.name}</h1>
+                 <h1 class="mt-4">${result.name}</h1>
 
                 <div class="row">
                    
@@ -195,11 +196,11 @@ const buildResult = (result) => {
 
             <div class="row">
               <div class="col">
-                    <select class="col form-select" onchange="funcao_clicou_no_botao(this.value)">
+                    <select class="mb-3 col form-select" onchange="funcao_clicou_no_botao(this.value)">
                         <option>selecione um episodio</option>
                         ${episodes.map(episode => `<option value="${episode}">${episode}</option>`).join('')}
                     </select>
-                    <span class="btn btn-primary col" >VAI</span> 
+                    
                 </div>
             </div>
 
@@ -257,9 +258,10 @@ const BuildHome = async () => {
         let back = episodes[index - 1]
 
         let conteudo = `
-        <div class= " mt-3 m-3 col-sm-2 bg-dark text-white rounded">
-        <img src="${personagensResult}" class="p-1 img-fluid">
-        <p><span class="" onclick="consultaPerson(${idPersonagem})">${nomeDosPersonagens}</span></p>
+        <div class= "mt-3 m-3 col-sm-5 col-md-3 col-lg-2 bg-dark text-white rounded">
+
+       <span onclick="consultaPerson(${idPersonagem})"><img src="${personagensResult}" class="p-1 img-fluid"></span>
+        <p>${nomeDosPersonagens}</p>
         </div>
       `;
 
@@ -299,6 +301,8 @@ btnGo.addEventListener('click', async (event) => { //usando async para deixar as
 });
 
 // btnReset.addEventListener('click', () => location.reload());
+
+
 // reflash na pagina usando botao limpar (location.reload())
 
 // btnAll.addEventListener('click', (event) => {
@@ -312,3 +316,5 @@ btnGo.addEventListener('click', async (event) => { //usando async para deixar as
 // });
 // const buttons = document.getElementBytagName("button"); buttons('eps');
 // buttons.className = 'btn btn-primary';
+
+
