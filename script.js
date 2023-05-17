@@ -160,7 +160,7 @@ const buildPesquisa = async () => {
         conteudo = `
         <div class= "mt-3 m-3 col-sm-5 col-md-3 col-lg-2 bg-dark text-white rounded">
       <span onclick="consultaPerson(${idPersonagem})"><img src="${personagensResult}" class="p-4 img-fluid"></span>
-      <p>${nomeDosPersonagens}</p>
+      <p class="text-center">${nomeDosPersonagens}</p>
       </div>
     `;
 
@@ -261,7 +261,7 @@ const BuildHome = async () => {
         <div class= "mt-3 m-3 col-sm-5 col-md-3 col-lg-2 bg-dark text-white rounded">
 
        <span onclick="consultaPerson(${idPersonagem})"><img src="${personagensResult}" class="p-1 img-fluid"></span>
-        <p>${nomeDosPersonagens}</p>
+        <p class="text-center">${nomeDosPersonagens}</p>
         </div>
       `;
 
